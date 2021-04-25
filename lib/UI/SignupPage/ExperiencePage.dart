@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dpr_doctor_app/Controller/AuthController.dart';
-import 'package:dpr_doctor_app/UI/LoginPage/login_page.dart';
-import 'package:dpr_doctor_app/UI/SignupPage/personal_info_page.dart';
+import 'package:dpr_doctor_app/UI/SignupPage/SignUpHeader.dart';
 import 'package:dpr_doctor_app/Utils/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class SignupPage extends StatelessWidget {
+class ExperiencePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Get.put(AuthController());
@@ -19,7 +19,7 @@ class SignupPage extends StatelessWidget {
       builder: (controller) {
         return WillPopScope(
           // ignore: missing_return
-        onWillPop: (){
+          onWillPop: (){
             Get.back();
           },
           child: Scaffold(
@@ -28,32 +28,10 @@ class SignupPage extends StatelessWidget {
                 return Container(
                   child: Stack(
                     children: [
-                      Positioned(
-                        top: 0,
-                        height: 300,
-                        width: constraints.maxWidth,
-                        child: Container(
-                          padding: const EdgeInsets.all(25),
-                          color: primaryBlue,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AutoSizeText("Welcome Doctor,",style: TextStyle(
-                                color: white,
-                                fontSize: paragraph,
-                              ),),
-                              AutoSizeText("Sign Up",style: TextStyle(
-                                color: white,
-                                fontSize: h1,
-                              ),),
-                            ],
-                          ),
-                        ),
-                      ),
+                      SignupHeader(constraints: constraints,page: 3,pagePercent: 0.75,pageTitle: "Experience",pageSubTitle: "Next Chamber"),
 
                       Positioned(
-                        top: 230,
+                        top: 160,
                         height: constraints.maxHeight*0.75,
                         width: constraints.maxWidth,
                         child: Container(
@@ -274,35 +252,35 @@ class SignupPage extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       ListTile(
-                                          contentPadding: const EdgeInsets.all(0),
-                                          leading: Checkbox(
-                                            value: authController.acceptTerms,
-                                            onChanged: (val){
-                                              authController.acceptTerms = val;
-                                              authController.updateUI();
-                                            },
-                                          ),
-                                          title: RichText(
-                                            text: TextSpan(
+                                        contentPadding: const EdgeInsets.all(0),
+                                        leading: Checkbox(
+                                          value: authController.acceptTerms,
+                                          onChanged: (val){
+                                            authController.acceptTerms = val;
+                                            authController.updateUI();
+                                          },
+                                        ),
+                                        title: RichText(
+                                          text: TextSpan(
                                               text: "I accept the ",
-                                                style: TextStyle(
-                                                  color: Colors.black87,
-                                                  fontSize: caption,
-                                                ),
-                                                children: <TextSpan>[
-                                                  TextSpan(text: 'terms and conditions', style: TextStyle(color: primaryBlue, fontSize: caption)
-                                                  )
-                                                ]
+                                              style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: caption,
+                                              ),
+                                              children: <TextSpan>[
+                                                TextSpan(text: 'terms and conditions', style: TextStyle(color: primaryBlue, fontSize: caption)
+                                                )
+                                              ]
 
-                                            ),
                                           ),
+                                        ),
                                       ),
 
                                       SizedBox(height: 5,),
 
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: (){
-                                          Get.to(PersonalInfoPage());
+
                                         },
                                         child: Container(
                                           height: 50,
@@ -323,34 +301,6 @@ class SignupPage extends StatelessWidget {
                                         ),
                                       ),
 
-                                      SizedBox(height: 30,),
-
-                                      Align(
-                                        alignment: Alignment.center,
-                                        child: Column(
-                                          children: [
-                                            AutoSizeText("Already have an account?",style: TextStyle(
-                                              color: Colors.grey.shade600.withOpacity(0.6),
-                                              fontSize: paragraph,
-                                              fontWeight: FontWeight.w600,
-                                            ),),
-
-                                            SizedBox(height: 5,),
-
-                                            InkWell(
-                                              onTap: (){
-                                                Get.to(LoginPage());
-                                              },
-                                              child: AutoSizeText("Sign in",style: TextStyle(
-                                                color: primaryBlue,
-                                                fontSize: paragraph,
-                                                fontWeight: FontWeight.w600,
-                                              ),),
-                                            ),
-
-                                          ],
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),

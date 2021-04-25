@@ -12,11 +12,13 @@ import 'HexColors.dart';
 Color white = HexColor("#FFFFFF");//white
 Color primaryBlue = HexColor("#398186");
 Color greyText = HexColor("#9DAEB1");
+Color progressBlue = HexColor("#062349");
+Color primaryBlueLight = HexColor("#9CCECB");
 
 //Color loader_back = HexColor("#");
 
 
-//#494A54;
+//#9CCECB;
 
 //COLORS TAG END//
 
