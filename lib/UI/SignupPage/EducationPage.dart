@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dpr_doctor_app/Controller/AuthController.dart';
 import 'package:dpr_doctor_app/Models/SignupDegreeModel.dart';
+import 'package:dpr_doctor_app/UI/SignupPage/ExperiencePage.dart';
 import 'package:dpr_doctor_app/UI/SignupPage/SignUpHeader.dart';
 import 'package:dpr_doctor_app/Utils/Constant.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -27,6 +28,8 @@ class EducationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Get.put(AuthController());
+    final TextEditingController scholarship_tex= TextEditingController();
+    final TextEditingController extra_activity_tex = TextEditingController();
     return GetBuilder<AuthController>(
       init: AuthController(),
       initState: (_){
@@ -47,14 +50,13 @@ class EducationPage extends StatelessWidget {
             body: LayoutBuilder(
               builder: (context, constraints) {
                 return Container(
-                  child: Stack(
+                  color: primaryBlue,
+                  child: Column(
                     children: [
+                      SizedBox(height:40,),
                       SignupHeader(constraints: constraints,page: 2,pagePercent: 0.50,pageTitle: "Education",pageSubTitle: "Next Experience, Chamber"),
-
-                      Positioned(
-                        top: 160,
-                        height: constraints.maxHeight*0.75,
-                        width: constraints.maxWidth,
+                      SizedBox(height:20,),
+                      Expanded(
                         child: Container(
                           padding: const EdgeInsets.all(25),
                           decoration: BoxDecoration(
@@ -84,6 +86,7 @@ class EducationPage extends StatelessWidget {
                                         elevation: 0,
                                         title: Text('Degree Type ${index+1}*'),
                                         children: [
+                                          //Degree
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Align(
@@ -96,6 +99,7 @@ class EducationPage extends StatelessWidget {
                                           ),
 
                                           SizedBox(height: 5,),
+
 
                                           TextField(
                                             autofocus: false,
@@ -117,41 +121,11 @@ class EducationPage extends StatelessWidget {
                                             keyboardType: TextInputType.number,
                                           ),
 
+                                          //Institution
                                           SizedBox(height: 10,),
-
-                                          Container(
-                                            width: constraints.maxWidth,
-                                            color: white,
-                                            alignment: Alignment.center,
-                                            padding: const EdgeInsets.all(5),
-                                            child: DropdownButton<dynamic>(
-                                              hint: Text("Select passing year"),
-                                              underline: SizedBox(),
-                                              isExpanded: true,
-                                              value: _selectedYear,
-                                              items: yearList.map((value) {
-                                                return DropdownMenuItem<dynamic>(
-                                                  value: value,
-                                                  child: new Text(value.toString()),
-                                                );
-                                              }).toList(),
-                                              onChanged: (val) async{
-                                                _selectedYear = val;
-                                                print(index);
-                                                degreeMap["data"].data[index].variable.setpassingYear = val.toString();
-                                                //print(degreeList[index].variable.passingYear);
-                                                print(val.toString());
-                                                authController.updateUI();
-                                              },
-                                            ),
-                                          ),
-
-                                          Divider(),
-
-                                          SizedBox(height: 10,),
-
                                           Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: const EdgeInsets.only(left:35.0, top:8.0, bottom:8.0),
+
                                             child: Align(
                                               alignment: Alignment.centerLeft,
                                               child: AutoSizeText("Institution",style: TextStyle(
@@ -163,31 +137,93 @@ class EducationPage extends StatelessWidget {
 
                                           SizedBox(height: 5,),
 
-                                          TextField(
-                                            autofocus: false,
-                                            style: TextStyle(
-                                              color: Colors.black87,
-                                              fontSize: subHead,
-                                            ),
-                                            decoration: InputDecoration(
-                                              hintText: "Enter name here",
-                                              border: new OutlineInputBorder(
-                                                borderRadius: const BorderRadius.all(
-                                                  const Radius.circular(10.0),
-                                                ),
-                                                borderSide: BorderSide(color: greyText),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left:35.0),
+                                            child: TextField(
+                                              //controller: degreeList[index].variable.institution,
+                                              autofocus: false,
+                                              style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: subHead,
                                               ),
+                                              decoration: InputDecoration(
+                                                hintText: "e.g. Dhaka medical college",
+                                                border: new OutlineInputBorder(
+                                                  borderRadius: const BorderRadius.all(
+                                                    const Radius.circular(10.0),
+                                                  ),
+                                                  borderSide: BorderSide(color: greyText),
+                                                ),
+                                              ),
+                                              textAlign: TextAlign.start,
+                                              cursorColor: Colors.black87,
+                                              keyboardType: TextInputType.number,
                                             ),
-                                            textAlign: TextAlign.start,
-                                            cursorColor: Colors.black87,
-                                            keyboardType: TextInputType.number,
+                                          ),
+                                          //
+
+
+                                          //Passing year
+                                          SizedBox(height: 10,),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left:35.0, top:8.0, bottom:8.0),
+
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: AutoSizeText("Passing year",style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: subHead-1,
+                                              ),),
+                                            ),
                                           ),
 
 
+                                          Padding(
+                                            padding: const EdgeInsets.only(left:35.0),
+                                            child: Container(
+                                              //width: 200.0,
+                                              height: 60.0,
+
+                                              decoration: BoxDecoration(
+
+                                                  borderRadius: BorderRadius.circular(10.0),
+                                                  border: Border.all(color: Colors.blueGrey)),
+                                              child: DropdownButtonHideUnderline(
+                                                child: ButtonTheme(
+                                                  alignedDropdown: true,
+                                                  child: DropdownButton<dynamic>(
+
+                                                    hint: Text("e.g. 1900"),
+                                                    underline: SizedBox(),
+                                                    isExpanded: true,
+                                                    value: _selectedYear,
+                                                    items: yearList.map((value) {
+                                                      return DropdownMenuItem<dynamic>(
+                                                        value: value,
+                                                        child: new Text(value.toString()),
+                                                      );
+                                                    }).toList(),
+                                                    onChanged: (val) async{
+                                                      _selectedYear = val;
+                                                      print(index);
+                                                      degreeMap["data"].data[index].variable.setpassingYear = val.toString();
+                                                      //print(degreeList[index].variable.passingYear);
+                                                      print(val.toString());
+                                                      authController.updateUI();
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+
+
+
                                           SizedBox(height: 10,),
+                                          //Batch
 
                                           Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: const EdgeInsets.only(left:35.0, top:8.0, bottom:8.0),
                                             child: Align(
                                               alignment: Alignment.centerLeft,
                                               child: AutoSizeText("Batch",style: TextStyle(
@@ -199,33 +235,38 @@ class EducationPage extends StatelessWidget {
 
                                           SizedBox(height: 5,),
 
-                                          TextField(
-                                            autofocus: false,
-                                            style: TextStyle(
-                                              color: Colors.black87,
-                                              fontSize: subHead,
-                                            ),
-                                            decoration: InputDecoration(
-                                              hintText: "Enter name here",
-                                              border: new OutlineInputBorder(
-                                                borderRadius: const BorderRadius.all(
-                                                  const Radius.circular(10.0),
-                                                ),
-                                                borderSide: BorderSide(color: greyText),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left:35.0),
+                                            child: TextField(
+                                              //controller: degreeList[index].variable.batch,
+                                              autofocus: false,
+                                              style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: subHead,
                                               ),
+                                              decoration: InputDecoration(
+                                                hintText: "e.g. 21st",
+                                                border: new OutlineInputBorder(
+                                                  borderRadius: const BorderRadius.all(
+                                                    const Radius.circular(10.0),
+                                                  ),
+                                                  borderSide: BorderSide(color: greyText),
+                                                ),
+                                              ),
+                                              textAlign: TextAlign.start,
+                                              cursorColor: Colors.black87,
+                                              keyboardType: TextInputType.number,
                                             ),
-                                            textAlign: TextAlign.start,
-                                            cursorColor: Colors.black87,
-                                            keyboardType: TextInputType.number,
                                           ),
 
 
 
                                           SizedBox(height: 10,),
+                                          //Awards
 
 
                                           Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: const EdgeInsets.only(left:35.0, top:8.0, bottom:8.0),
                                             child: Align(
                                               alignment: Alignment.centerLeft,
                                               child: AutoSizeText("Award",style: TextStyle(
@@ -237,24 +278,27 @@ class EducationPage extends StatelessWidget {
 
                                           SizedBox(height: 5,),
 
-                                          TextField(
-                                            autofocus: false,
-                                            style: TextStyle(
-                                              color: Colors.black87,
-                                              fontSize: subHead,
-                                            ),
-                                            decoration: InputDecoration(
-                                              hintText: "Enter name here",
-                                              border: new OutlineInputBorder(
-                                                borderRadius: const BorderRadius.all(
-                                                  const Radius.circular(10.0),
-                                                ),
-                                                borderSide: BorderSide(color: greyText),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left:35.0),
+                                            child: TextField(
+                                              autofocus: false,
+                                              style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: subHead,
                                               ),
+                                              decoration: InputDecoration(
+                                                hintText: "e.g. Gold Medilist",
+                                                border: new OutlineInputBorder(
+                                                  borderRadius: const BorderRadius.all(
+                                                    const Radius.circular(10.0),
+                                                  ),
+                                                  borderSide: BorderSide(color: greyText),
+                                                ),
+                                              ),
+                                              textAlign: TextAlign.start,
+                                              cursorColor: Colors.black87,
+                                              keyboardType: TextInputType.number,
                                             ),
-                                            textAlign: TextAlign.start,
-                                            cursorColor: Colors.black87,
-                                            keyboardType: TextInputType.number,
                                           ),
 
 
@@ -287,259 +331,214 @@ class EducationPage extends StatelessWidget {
 
                                       SizedBox(width: 5,),
 
-                                      AutoSizeText("Add more degree(s)",style: TextStyle(
+                                      AutoSizeText("Add more degree(s)", maxFontSize: subHead, minFontSize: caption, style: TextStyle(
                                         color: primaryBlue,
-                                        fontSize: caption,
+
                                         fontWeight: FontWeight.w600
                                       ),),
                                     ],
                                   ),
                                 ),
+                                SizedBox(height: 15,),
+                              Divider(thickness: 2, color: dividerBlue,),
 
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
+                                //Scholarship
+                                Padding(
+                                  padding: const EdgeInsets.only(top:8, bottom: 8),
+                                  child: AutoSizeText("Scholarship", maxFontSize: subHead, minFontSize: caption, style: TextStyle(
+                                      fontWeight: FontWeight.w600
+                                  ),),
+                                ),
+                                TextField(
+                                  controller: scholarship_tex,
+                                  autofocus: false,
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: subHead,
                                   ),
-                                  width: constraints.maxWidth,
-                                  child: TextField(
-                                    autofocus: false,
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: subHead,
+                                  decoration: InputDecoration(
+                                    hintText: "e.g. Anything",
+                                    border: new OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                        const Radius.circular(10.0),
+                                      ),
+                                      borderSide: BorderSide(color: greyText),
                                     ),
-                                    decoration: InputDecoration(
-                                      hintText: "Enter name here",
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                    ),
-                                    textAlign: TextAlign.start,
-                                    cursorColor: Colors.black87,
-                                    keyboardType: TextInputType.number,
                                   ),
+                                  textAlign: TextAlign.start,
+                                  cursorColor: Colors.black87,
+                                  keyboardType: TextInputType.text,
                                 ),
                                 SizedBox(height: 10,),
 
-                                AutoSizeText("Phone Number",style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: paragraph,
-                                ),),
+                                //HSC
+                                Padding(
+                                  padding: const EdgeInsets.only(top:8, bottom: 8),
+                                  child: AutoSizeText("HSC passing year", maxFontSize: subHead, minFontSize: caption, style: TextStyle(
+                                      fontWeight: FontWeight.w600
+                                  ),),
+                                ),
                                 Container(
-                                  alignment: Alignment.centerLeft,
+                                  //width: 200.0,
+                                  height: 60.0,
+
                                   decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                  ),
-                                  width: constraints.maxWidth,
-                                  child: TextField(
-                                    autofocus: false,
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: subHead,
+
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      border: Border.all(color: Colors.blueGrey)),
+                                  child: DropdownButtonHideUnderline(
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton<dynamic>(
+
+                                        hint: Text("e.g. 1996"),
+
+                                        isExpanded: true,
+                                        value: _selectedYear,
+                                        items: yearList.map((value) {
+                                          return DropdownMenuItem<dynamic>(
+                                            value: value,
+                                            child: new Text(value.toString()),
+                                          );
+                                        }).toList(),
+                                        onChanged: (val) async{
+                                          _selectedYear = val;
+                                          print('HSC value');
+                                         // degreeMap["data"].data[index].variable.setpassingYear = val.toString();
+                                          //print(degreeList[index].variable.passingYear);
+                                          print(val.toString());
+                                          authController.updateUI();
+                                        },
+                                      ),
                                     ),
-                                    decoration: InputDecoration(
-                                      hintText: "+8801674893726",
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                    ),
-                                    textAlign: TextAlign.start,
-                                    cursorColor: Colors.black87,
-                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
+
+
                                 SizedBox(height: 10,),
 
+                                //SSC
 
-                                AutoSizeText("BMDC Number",style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: paragraph,
-                                ),),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                  ),
-                                  width: constraints.maxWidth,
-                                  child: TextField(
-                                    autofocus: false,
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: subHead,
-                                    ),
-                                    decoration: InputDecoration(
-                                      hintText: "Enter your BMDC number here",
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                    ),
-                                    textAlign: TextAlign.start,
-                                    cursorColor: Colors.black87,
-                                    keyboardType: TextInputType.number,
-                                  ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top:8, bottom: 8),
+                                  child: AutoSizeText("SSC passing year", maxFontSize: subHead, minFontSize: caption, style: TextStyle(
+                                      fontWeight: FontWeight.w600
+                                  ),),
                                 ),
-
-                                SizedBox(height: 10,),
-
-
-                                AutoSizeText("Password",style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: paragraph,
-                                ),),
-                                SizedBox(height: 0,),
                                 Container(
-                                  alignment: Alignment.centerLeft,
+                                  //width: 200.0,
+                                  height: 60.0,
+
                                   decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                  ),
-                                  width: constraints.maxWidth,
-                                  child: TextField(
-                                    autofocus: false,
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: subHead,
+
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      border: Border.all(color: Colors.blueGrey)),
+                                  child: DropdownButtonHideUnderline(
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton<dynamic>(
+
+                                        hint: Text("e.g. 1996"),
+                                        
+                                        isExpanded: true,
+                                        value: _selectedYear,
+                                        items: yearList.map((value) {
+                                          return DropdownMenuItem<dynamic>(
+                                            value: value,
+                                            child: new Text(value.toString()),
+                                          );
+                                        }).toList(),
+                                        onChanged: (val) async{
+                                          _selectedYear = val;
+                                          print('SSC value');
+                                          // degreeMap["data"].data[index].variable.setpassingYear = val.toString();
+                                          //print(degreeList[index].variable.passingYear);
+                                          print(val.toString());
+                                          authController.updateUI();
+                                        },
+                                      ),
                                     ),
-                                    decoration: InputDecoration(
-                                        hintText: "*********",
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
-                                        suffixIcon: IconButton(
-                                          icon: Icon(authController.showPass == true ? Feather.eye : Feather.eye_off,size: 20,),
-                                          onPressed: () {
-
-                                            if(authController.showPass == false){
-                                              Utils().HideKeyboard();
-                                              authController.showPass = true;
-                                            }
-                                            else{
-                                              Utils().HideKeyboard();
-                                              authController.showPass = false;
-                                            }
-
-                                            authController.updateUI();
-
-                                          },
-                                        )
-                                    ),
-                                    textAlign: TextAlign.start,
-                                    cursorColor: Colors.black87,
-                                    obscureText: !authController.showPass,
-                                    keyboardType: TextInputType.text,
                                   ),
                                 ),
 
                                 SizedBox(height: 10,),
 
-
-                                AutoSizeText("Confirm password",style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: paragraph,
-                                ),),
-                                SizedBox(height: 0,),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
+                                //Extra activities
+                                Padding(
+                                  padding: const EdgeInsets.only(top:8, bottom: 8),
+                                  child: AutoSizeText("Extra Curricular Activities", maxFontSize: subHead, minFontSize: caption, style: TextStyle(
+                                      fontWeight: FontWeight.w600
+                                  ),),
+                                ),
+                                TextField(
+                                  controller: extra_activity_tex,
+                                  autofocus: false,
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: subHead,
                                   ),
-                                  width: constraints.maxWidth,
-                                  child: TextField(
-                                    autofocus: false,
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: subHead,
+                                  decoration: InputDecoration(
+                                    hintText: "e.g. Anything",
+                                    border: new OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                        const Radius.circular(10.0),
+                                      ),
+                                      borderSide: BorderSide(color: greyText),
                                     ),
-                                    decoration: InputDecoration(
-                                        hintText: "*********",
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
-                                        suffixIcon: IconButton(
-                                          icon: Icon(authController.showPass == true ? Feather.eye : Feather.eye_off,size: 20,),
-                                          onPressed: () {
-
-                                            if(authController.showPass == false){
-                                              Utils().HideKeyboard();
-                                              authController.showPass = true;
-                                            }
-                                            else{
-                                              Utils().HideKeyboard();
-                                              authController.showPass = false;
-                                            }
-
-                                            authController.updateUI();
-
-                                          },
-                                        )
-                                    ),
-                                    textAlign: TextAlign.start,
-                                    cursorColor: Colors.black87,
-                                    obscureText: !authController.showPass,
-                                    keyboardType: TextInputType.text,
                                   ),
+                                  textAlign: TextAlign.start,
+                                  cursorColor: Colors.black87,
+                                  keyboardType: TextInputType.text,
                                 ),
 
-                                SizedBox(height: 5,),
+                                SizedBox(height: 50,),
 
                                 Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      ListTile(
-                                        contentPadding: const EdgeInsets.all(0),
-                                        leading: Checkbox(
-                                          value: authController.acceptTerms,
-                                          onChanged: (val){
-                                            authController.acceptTerms = val;
-                                            authController.updateUI();
-                                          },
-                                        ),
-                                        title: RichText(
-                                          text: TextSpan(
-                                              text: "I accept the ",
-                                              style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: caption,
-                                              ),
-                                              children: <TextSpan>[
-                                                TextSpan(text: 'terms and conditions', style: TextStyle(color: primaryBlue, fontSize: caption)
-                                                )
-                                              ]
-
-                                          ),
-                                        ),
-                                      ),
-
-                                      SizedBox(height: 5,),
-
                                       InkWell(
                                         onTap: (){
 
                                         },
                                         child: Container(
                                           height: 50,
-                                          width: constraints.maxWidth,
+                                          width: constraints.maxWidth/2.5,
+                                          decoration: BoxDecoration(
+                                            color: primaryBlueLight,
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: AutoSizeText(
+                                              "Back",
+                                              style: TextStyle(
+                                                fontSize: h5,
+                                                color: primaryBlue,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+
+                                      InkWell(
+                                        onTap: (){
+                                          Get.to(ExperiencePage());
+                                        },
+                                        child: Container(
+                                          height: 50,
+                                          width: constraints.maxWidth/2.5,
                                           decoration: BoxDecoration(
                                             color: primaryBlue,
                                             borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: Center(
                                             child: AutoSizeText(
-                                              "Sign up",
+                                              "Next",
                                               style: TextStyle(
-                                                fontSize: subHead,
+                                                fontSize: h5,
                                                 color: white,
                                               ),
                                             ),

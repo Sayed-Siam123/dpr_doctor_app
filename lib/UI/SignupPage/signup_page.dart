@@ -26,19 +26,20 @@ class SignupPage extends StatelessWidget {
             body: LayoutBuilder(
               builder: (context, constraints) {
                 return Container(
-                  child: Stack(
+                  color:primaryBlue,
+                  child: Column(
                     children: [
-                      Positioned(
-                        top: 0,
-                        height: 300,
+                      Container(
                         width: constraints.maxWidth,
                         child: Container(
                           padding: const EdgeInsets.all(25),
                           color: primaryBlue,
                           child: Column(
+
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              SizedBox(height:80,),
                               AutoSizeText("Welcome Doctor,",style: TextStyle(
                                 color: white,
                                 fontSize: paragraph,
@@ -47,15 +48,13 @@ class SignupPage extends StatelessWidget {
                                 color: white,
                                 fontSize: h1,
                               ),),
+                              SizedBox(height:20,),
                             ],
                           ),
                         ),
                       ),
 
-                      Positioned(
-                        top: 230,
-                        height: constraints.maxHeight*0.75,
-                        width: constraints.maxWidth,
+                      Expanded(
                         child: Container(
                           padding: const EdgeInsets.all(25),
                           decoration: BoxDecoration(
@@ -85,11 +84,11 @@ class SignupPage extends StatelessWidget {
                                     ),
                                     decoration: InputDecoration(
                                       hintText: "Enter name here",
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
+                                      //border: InputBorder.none,
+                                      //focusedBorder: InputBorder.none,
+                                      //enabledBorder: InputBorder.none,
+                                     // errorBorder: InputBorder.none,
+                                     // disabledBorder: InputBorder.none,
                                     ),
                                     textAlign: TextAlign.start,
                                     cursorColor: Colors.black87,
@@ -117,11 +116,7 @@ class SignupPage extends StatelessWidget {
                                     ),
                                     decoration: InputDecoration(
                                       hintText: "+8801674893726",
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
+
                                     ),
                                     textAlign: TextAlign.start,
                                     cursorColor: Colors.black87,
@@ -150,11 +145,7 @@ class SignupPage extends StatelessWidget {
                                     ),
                                     decoration: InputDecoration(
                                       hintText: "Enter your BMDC number here",
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
+
                                     ),
                                     textAlign: TextAlign.start,
                                     cursorColor: Colors.black87,
@@ -184,11 +175,7 @@ class SignupPage extends StatelessWidget {
                                     ),
                                     decoration: InputDecoration(
                                         hintText: "*********",
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
+
                                         suffixIcon: IconButton(
                                           icon: Icon(authController.showPass == true ? Feather.eye : Feather.eye_off,size: 20,),
                                           onPressed: () {
@@ -236,11 +223,7 @@ class SignupPage extends StatelessWidget {
                                     ),
                                     decoration: InputDecoration(
                                         hintText: "*********",
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
+
                                         suffixIcon: IconButton(
                                           icon: Icon(authController.showPass == true ? Feather.eye : Feather.eye_off,size: 20,),
                                           onPressed: () {

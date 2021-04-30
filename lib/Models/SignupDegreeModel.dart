@@ -22,7 +22,7 @@ class Datum {
     this.variable,
   });
 
-  TextEditingController type;
+  String  type;
   Variable variable;
 
   factory Datum.fromMap(Map<String, dynamic> json) => Datum(
@@ -31,7 +31,7 @@ class Datum {
   );
 
   Map<String, dynamic> toMap() => {
-    "type": type.text.toString() == "" ? "" : type.text.toString(),
+    "type": type.toString() == "" ? "" : type.toString(),
     "variable": variable == null ? null : variable.toMap(),
   };
 }
@@ -44,10 +44,10 @@ class Variable {
     this.award,
   });
 
-  TextEditingController institution;
+  String  institution;
   String passingYear;
-  TextEditingController batch;
-  TextEditingController award;
+  String batch;
+  String  award;
 
   set setpassingYear(String item){
     this.passingYear = item;
@@ -65,9 +65,9 @@ class Variable {
   );
 
   Map<String, dynamic> toMap() => {
-    "institution": institution.text.toString() == "" ? "" : institution.text.toString(),
+    "institution": institution.toString() == "" ? "" : institution.toString(),
     "passing_year": passingYear == null ? null : passingYear,
-    "batch": batch.text.toString() == "" ? "" : batch.text.toString(),
-    "award": award.text.toString() == "" ? "" : award.text.toString(),
+    "batch": batch.toString() == "" ? "" : batch.toString(),
+    "award": award.toString() == "" ? "" : award.toString(),
   };
 }

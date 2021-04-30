@@ -39,6 +39,8 @@ dependencies:
   auto_size_text: 2.1.0
   percent_indicator: ^2.1.7+2
   expansion_tile_card: 1.1.0
+  custom_switch: ^0.0.1
+
 
 
 

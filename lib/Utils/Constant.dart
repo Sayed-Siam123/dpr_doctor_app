@@ -10,10 +10,11 @@ import 'HexColors.dart';
 //COLORS TAG START//
 
 Color white = HexColor("#FFFFFF");//white
-Color primaryBlue = HexColor("#398186");
+Color primaryBlue = HexColor("#0C909D");
 Color greyText = HexColor("#9DAEB1");
 Color progressBlue = HexColor("#062349");
 Color primaryBlueLight = HexColor("#9CCECB");
+Color dividerBlue = HexColor("#e1f2f1");
 
 //Color loader_back = HexColor("#");
 
@@ -30,12 +31,13 @@ Color primaryBlueLight = HexColor("#9CCECB");
 
 
 //FONT SIZE START
-
-double h1 = 40;
-double h2 = 35;
-double h3 = 24;
-double h4 = 22;
+//According to bootstrap
+double h1 = 50;
+double h2 = 32;
+double h3 = 28;
+double h4 = 24;
 double h5 = 20;
+double h6 = 16;
 double subHead = 18;
 double paragraph = 15;
 double caption = 13;

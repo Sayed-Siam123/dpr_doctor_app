@@ -6,7 +6,8 @@ import 'package:dpr_doctor_app/Utils/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import "dart:ui" as ui;
+//import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class PersonalInfoPage extends StatelessWidget {
 
@@ -34,14 +35,13 @@ class PersonalInfoPage extends StatelessWidget {
             body: LayoutBuilder(
               builder: (context, constraints) {
                 return Container(
-                  child: Stack(
+                  color: primaryBlue,
+                  child: Column(
                     children: [
+                      SizedBox(height:40,),
                       SignupHeader(constraints: constraints,page: 1,pagePercent: 0.25,pageTitle: "Personal Info",pageSubTitle: "Next Education, Experience, Chamber"),
-
-                      Positioned(
-                        top: 160,
-                        height: constraints.maxHeight*0.75,
-                        width: constraints.maxWidth,
+                      SizedBox(height:20,),
+                      Expanded(
                         child: Container(
                           padding: const EdgeInsets.all(25),
                           decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class PersonalInfoPage extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         color: Colors.transparent,
                                       ),
-                                      width: constraints.maxWidth/2.3,
+                                      width: constraints.maxWidth/2,
                                       child: TextField(
                                         autofocus: false,
                                         style: TextStyle(
@@ -75,12 +75,7 @@ class PersonalInfoPage extends StatelessWidget {
                                             borderSide: BorderSide(color: greyText),
                                           ),
 
-                                          // enabledBorder: InputBorder.none,
-                                          // errorBorder: InputBorder.none,
-                                          // disabledBorder: InputBorder.none,
-                                          // focusedBorder: UnderlineInputBorder(
-                                          //   borderSide: BorderSide(color: Colors.green),
-                                          // ),
+
                                         ),
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black87,
@@ -91,8 +86,8 @@ class PersonalInfoPage extends StatelessWidget {
                                     Stack(
                                       children: [
                                         Container(
-                                          height: 120,
-                                          width: 120,
+                                          height: MediaQuery.of(context).size.width/4,
+                                          width: MediaQuery.of(context).size.width/4,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: Colors.transparent,
@@ -102,8 +97,8 @@ class PersonalInfoPage extends StatelessWidget {
 
 
                                         Positioned(
-                                          top: 90,
-                                          left: 80,
+                                          top: 70,
+                                          right: 10,
                                           child: Material(
                                             elevation: 3,
                                             shape: RoundedRectangleBorder(
@@ -128,40 +123,28 @@ class PersonalInfoPage extends StatelessWidget {
                                 SizedBox(height: 10,),
 
 
-                                AutoSizeText("Name",style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: paragraph,
-                                ),),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
+
+                                TextField(
+                                  autofocus: false,
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: subHead,
                                   ),
-                                  width: constraints.maxWidth,
-                                  child: TextField(
-                                    autofocus: false,
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: subHead,
-                                    ),
-                                    decoration: InputDecoration(
-                                      hintText: "Enter your full name here",
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                    ),
-                                    textAlign: TextAlign.start,
-                                    cursorColor: Colors.black87,
-                                    keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                    hintText: "Name *",
+
                                   ),
+                                  textAlign: TextAlign.start,
+                                  cursorColor: Colors.black87,
+                                  keyboardType: TextInputType.number,
                                 ),
 
                                 SizedBox(height: 10,),
 
 
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
@@ -176,24 +159,16 @@ class PersonalInfoPage extends StatelessWidget {
                                           fontSize: subHead,
                                         ),
                                         decoration: InputDecoration(
-                                          hintText: "BMDC number",
+                                          hintText: "Date of birth",
                                           // border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(color: greyText),
-                                          ),
 
-                                          // enabledBorder: InputBorder.none,
-                                          // errorBorder: InputBorder.none,
-                                          // disabledBorder: InputBorder.none,
-                                          // focusedBorder: UnderlineInputBorder(
-                                          //   borderSide: BorderSide(color: Colors.green),
-                                          // ),
+
+
                                           suffixIcon: IconButton(
                                             onPressed: (){
 
                                             },
-                                            icon: Icon(Feather.calendar,color: Colors.black45, size: h4),
+                                            icon: Icon( Feather.calendar ,color: Colors.black45, size: h4),
                                           )
                                         ),
                                         textAlign: TextAlign.start,
@@ -202,7 +177,7 @@ class PersonalInfoPage extends StatelessWidget {
                                       ),
                                     ),
 
-                                    SizedBox(width: 10,),
+
 
                                     Container(
                                       alignment: Alignment.centerLeft,
@@ -239,37 +214,40 @@ class PersonalInfoPage extends StatelessWidget {
                                   ],
                                 ),
 
-                                SizedBox(height: 10,),
+                                SizedBox(height: 5,),
 
                                 Container(
-                                  height: 60,
+                                  height: 50,
                                   width: constraints.maxWidth,
                                   color: white,
                                   alignment: Alignment.center,
                                   padding: const EdgeInsets.all(5),
-                                  child: DropdownButton<dynamic>(
-                                    hint: Text("Select Gender"),
-                                    underline: SizedBox(),
-                                    isExpanded: true,
-                                    value: _selectedGender,
-                                    items: genderList.map((value) {
-                                      return DropdownMenuItem<dynamic>(
-                                        value: value,
-                                        child: new Text(value.toString()),
-                                      );
-                                    }).toList(),
-                                    onChanged: (val) async{
-                                      _selectedGender = val;
-                                      print(val.toString());
-                                      authController.updateUI();
-                                    },
+
+                                  child: DropdownButtonHideUnderline (
+                                    child: DropdownButton<dynamic>(
+                                      hint: Text("Gender *"),
+                                      underline: SizedBox(),
+                                      isExpanded: true,
+                                      value: _selectedGender,
+                                      items: genderList.map((value) {
+                                        return DropdownMenuItem<dynamic>(
+                                          value: value,
+                                          child: new Text(value.toString()),
+                                        );
+                                      }).toList(),
+                                      onChanged: (val) async{
+                                        _selectedGender = val;
+                                        print(val.toString());
+                                        authController.updateUI();
+                                      },
+                                    ),
                                   ),
                                 ),
 
-                                Divider(),
 
 
-                                SizedBox(height: 10,),
+
+                                SizedBox(height: 5,),
 
                                 Container(
                                   alignment: Alignment.centerLeft,
@@ -286,7 +264,7 @@ class PersonalInfoPage extends StatelessWidget {
                                     decoration: InputDecoration(
                                       hintText: "Phone number *",
                                       // border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
+                                      //focusedBorder: InputBorder.none,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(color: greyText),
                                       ),
@@ -339,9 +317,9 @@ class PersonalInfoPage extends StatelessWidget {
                                   ),
                                 ),
 
-                                SizedBox(height: 40,),
+                                SizedBox(height: 20,),
 
-                                
+
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -353,7 +331,6 @@ class PersonalInfoPage extends StatelessWidget {
                                       children: [
                                         IconButton(
                                           onPressed: (){
-
                                           },
                                           icon: Image.asset("assets/images/fb.png"),
                                         ),
@@ -385,141 +362,24 @@ class PersonalInfoPage extends StatelessWidget {
 
                                   ],
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top:8, bottom: 8),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      children: <InlineSpan> [
 
+                                        WidgetSpan(
+                                          alignment: ui.PlaceholderAlignment.middle,
+                                          child: Icon(Icons.info, size: 16.55, color: primaryBlue,),
+                                        ),
+                                        TextSpan(
+                                            text: " Through social links, only public information are visible", style: TextStyle(color: primaryBlue, fontSize: caption,fontWeight: FontWeight.w600)
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
 
-                                // AutoSizeText("BMDC Number",style: TextStyle(
-                                //   color: Colors.black87,
-                                //   fontSize: paragraph,
-                                // ),),
-                                // Container(
-                                //   alignment: Alignment.centerLeft,
-                                //   decoration: BoxDecoration(
-                                //     color: Colors.transparent,
-                                //   ),
-                                //   width: constraints.maxWidth,
-                                //   child: TextField(
-                                //     autofocus: false,
-                                //     style: TextStyle(
-                                //       color: Colors.black87,
-                                //       fontSize: subHead,
-                                //     ),
-                                //     decoration: InputDecoration(
-                                //       hintText: "Enter your BMDC number here",
-                                //       border: InputBorder.none,
-                                //       focusedBorder: InputBorder.none,
-                                //       enabledBorder: InputBorder.none,
-                                //       errorBorder: InputBorder.none,
-                                //       disabledBorder: InputBorder.none,
-                                //     ),
-                                //     textAlign: TextAlign.start,
-                                //     cursorColor: Colors.black87,
-                                //     keyboardType: TextInputType.number,
-                                //   ),
-                                // ),
-                                //
-                                // SizedBox(height: 10,),
-                                //
-                                //
-                                // AutoSizeText("Password",style: TextStyle(
-                                //   color: Colors.black87,
-                                //   fontSize: paragraph,
-                                // ),),
-                                // SizedBox(height: 0,),
-                                // Container(
-                                //   alignment: Alignment.centerLeft,
-                                //   decoration: BoxDecoration(
-                                //     color: Colors.transparent,
-                                //   ),
-                                //   width: constraints.maxWidth,
-                                //   child: TextField(
-                                //     autofocus: false,
-                                //     style: TextStyle(
-                                //       color: Colors.black87,
-                                //       fontSize: subHead,
-                                //     ),
-                                //     decoration: InputDecoration(
-                                //         hintText: "*********",
-                                //         border: InputBorder.none,
-                                //         focusedBorder: InputBorder.none,
-                                //         enabledBorder: InputBorder.none,
-                                //         errorBorder: InputBorder.none,
-                                //         disabledBorder: InputBorder.none,
-                                //         suffixIcon: IconButton(
-                                //           icon: Icon(authController.showPass == true ? Feather.eye : Feather.eye_off,size: 20,),
-                                //           onPressed: () {
-                                //
-                                //             if(authController.showPass == false){
-                                //               Utils().HideKeyboard();
-                                //               authController.showPass = true;
-                                //             }
-                                //             else{
-                                //               Utils().HideKeyboard();
-                                //               authController.showPass = false;
-                                //             }
-                                //
-                                //             authController.updateUI();
-                                //
-                                //           },
-                                //         )
-                                //     ),
-                                //     textAlign: TextAlign.start,
-                                //     cursorColor: Colors.black87,
-                                //     obscureText: !authController.showPass,
-                                //     keyboardType: TextInputType.text,
-                                //   ),
-                                // ),
-                                //
-                                // SizedBox(height: 10,),
-                                //
-                                //
-                                // AutoSizeText("Confirm password",style: TextStyle(
-                                //   color: Colors.black87,
-                                //   fontSize: paragraph,
-                                // ),),
-                                // SizedBox(height: 0,),
-                                // Container(
-                                //   alignment: Alignment.centerLeft,
-                                //   decoration: BoxDecoration(
-                                //     color: Colors.transparent,
-                                //   ),
-                                //   width: constraints.maxWidth,
-                                //   child: TextField(
-                                //     autofocus: false,
-                                //     style: TextStyle(
-                                //       color: Colors.black87,
-                                //       fontSize: subHead,
-                                //     ),
-                                //     decoration: InputDecoration(
-                                //         hintText: "*********",
-                                //         border: InputBorder.none,
-                                //         focusedBorder: InputBorder.none,
-                                //         enabledBorder: InputBorder.none,
-                                //         errorBorder: InputBorder.none,
-                                //         disabledBorder: InputBorder.none,
-                                //         suffixIcon: IconButton(
-                                //           icon: Icon(authController.showPass == true ? Feather.eye : Feather.eye_off,size: 20,),
-                                //           onPressed: () {
-                                //
-                                //             if(authController.showPass == false){
-                                //               Utils().HideKeyboard();
-                                //               authController.showPass = true;
-                                //             }
-                                //             else{
-                                //               Utils().HideKeyboard();
-                                //               authController.showPass = false;
-                                //             }
-                                //
-                                //             authController.updateUI();
-                                //
-                                //           },
-                                //         )
-                                //     ),
-                                //     textAlign: TextAlign.start,
-                                //     cursorColor: Colors.black87,
-                                //     obscureText: !authController.showPass,
-                                //     keyboardType: TextInputType.text,
-                                //   ),
-                                // ),
 
                                 SizedBox(height: 50,),
 
