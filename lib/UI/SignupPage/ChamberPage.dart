@@ -63,6 +63,64 @@ class ChamberPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+
+
+                                Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15, bottom: 15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        AutoSizeText(
+                                          "Telemedicine",
+                                          maxFontSize: h5,
+                                          minFontSize: h6,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        CustomSwitch(
+                                            activeColor: primaryBlue,
+                                            value: true,
+                                            onChanged: (value) =>
+                                            value = !value),
+                                      ],
+                                    )),
+
+                                Divider(
+                                  color: dividerBlue,
+                                  thickness: 2,
+                                ),
+
+
+                                Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15, bottom: 15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        AutoSizeText(
+                                          "Home Doctor",
+                                          maxFontSize: h5,
+                                          minFontSize: h6,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        CustomSwitch(
+                                            activeColor: primaryBlue,
+                                            value: true,
+                                            onChanged: (value) =>
+                                            value = !value),
+                                      ],
+                                    )),
+
+                                Divider(
+                                  color: dividerBlue,
+                                  thickness: 2,
+                                ),
+
+
                                 ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   physics: ScrollPhysics(),
@@ -82,235 +140,228 @@ class ChamberPage extends StatelessWidget {
                                         elevation: 0,
                                         title: Text('Chamber ${index+1}*'),
                                         children: [
-                                          ExpansionTileCard(
-                                            elevation: 0,
-                                            borderRadius: BorderRadius.circular(10),
-                                            title: Text("Address"),
+                                          SizedBox(height: 5,),
+
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: AutoSizeText("Road No. / Holding No.",style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: subHead-1,
+                                              ),),
+                                            ),
+                                          ),
+
+                                          TextField(
+                                            autofocus: false,
+                                            style: TextStyle(
+                                              color: Colors.black87,
+                                              fontSize: subHead,
+                                            ),
+                                            decoration: InputDecoration(
+                                              hintText: "Address",
+                                              border: new OutlineInputBorder(
+                                                borderRadius: const BorderRadius.all(
+                                                  const Radius.circular(10.0),
+                                                ),
+                                                borderSide: BorderSide(color: greyText),
+                                              ),
+                                            ),
+                                            textAlign: TextAlign.start,
+                                            cursorColor: Colors.black87,
+                                            keyboardType: TextInputType.number,
+                                          ),
+
+                                          SizedBox(height: 5,),
+
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              SizedBox(height: 5,),
-
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Align(
-                                                  alignment: Alignment.centerLeft,
-                                                  child: AutoSizeText("Road No. / Holding No.",style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: subHead-1,
-                                                  ),),
+                                              Expanded(
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Align(
+                                                        alignment: Alignment.centerLeft,
+                                                        child: AutoSizeText("District",style: TextStyle(
+                                                          color: Colors.black87,
+                                                          fontSize: subHead-1,
+                                                        ),),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 60,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: greyText),
+                                                        borderRadius: const BorderRadius.all(
+                                                          const Radius.circular(10.0),
+                                                        ),
+                                                        color: white,
+                                                      ),
+                                                      alignment: Alignment.center,
+                                                      padding: const EdgeInsets.all(5),
+                                                      child: DropdownButton<dynamic>(
+                                                        hint: Text("Select District*"),
+                                                        underline: SizedBox(),
+                                                        isExpanded: true,
+                                                        value: selectedDistrict,
+                                                        items: district.map((value) {
+                                                          return DropdownMenuItem<dynamic>(
+                                                            value: value,
+                                                            child: new Text(value.toString()),
+                                                          );
+                                                        }).toList(),
+                                                        onChanged: (val) async{
+                                                          print(val.name.toString());
+                                                          selectedDistrict = val;
+                                                          authController.updateUI();
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
 
-                                              TextField(
-                                                autofocus: false,
-                                                style: TextStyle(
-                                                  color: Colors.black87,
-                                                  fontSize: subHead,
+                                              SizedBox(width: 30,),
+
+
+                                              Expanded(
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Align(
+                                                        alignment: Alignment.centerLeft,
+                                                        child: AutoSizeText("Sub District*",style: TextStyle(
+                                                          color: Colors.black87,
+                                                          fontSize: subHead-1,
+                                                        ),),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 60,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: greyText),
+                                                        borderRadius: const BorderRadius.all(
+                                                          const Radius.circular(10.0),
+                                                        ),
+                                                        color: white,
+                                                      ),
+                                                      alignment: Alignment.center,
+                                                      padding: const EdgeInsets.all(5),
+                                                      child: DropdownButton<dynamic>(
+                                                        hint: Text("Select Thana"),
+                                                        underline: SizedBox(),
+                                                        isExpanded: true,
+                                                        value: selectedDistrict,
+                                                        items: district.map((value) {
+                                                          return DropdownMenuItem<dynamic>(
+                                                            value: value,
+                                                            child: new Text(value.toString()),
+                                                          );
+                                                        }).toList(),
+                                                        onChanged: (val) async{
+                                                          print(val.name.toString());
+                                                          selectedDistrict = val;
+                                                          authController.updateUI();
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                decoration: InputDecoration(
-                                                  hintText: "Address",
-                                                  border: new OutlineInputBorder(
-                                                    borderRadius: const BorderRadius.all(
-                                                      const Radius.circular(10.0),
-                                                    ),
-                                                    borderSide: BorderSide(color: greyText),
-                                                  ),
-                                                ),
-                                                textAlign: TextAlign.start,
-                                                cursorColor: Colors.black87,
-                                                keyboardType: TextInputType.number,
                                               ),
 
-                                              SizedBox(height: 5,),
-
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Expanded(
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Align(
-                                                            alignment: Alignment.centerLeft,
-                                                            child: AutoSizeText("District",style: TextStyle(
-                                                              color: Colors.black87,
-                                                              fontSize: subHead-1,
-                                                            ),),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 60,
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(color: greyText),
-                                                            borderRadius: const BorderRadius.all(
-                                                              const Radius.circular(10.0),
-                                                            ),
-                                                            color: white,
-                                                          ),
-                                                          alignment: Alignment.center,
-                                                          padding: const EdgeInsets.all(5),
-                                                          child: DropdownButton<dynamic>(
-                                                            hint: Text("Select District*"),
-                                                            underline: SizedBox(),
-                                                            isExpanded: true,
-                                                            value: selectedDistrict,
-                                                            items: district.map((value) {
-                                                              return DropdownMenuItem<dynamic>(
-                                                                value: value,
-                                                                child: new Text(value.toString()),
-                                                              );
-                                                            }).toList(),
-                                                            onChanged: (val) async{
-                                                              print(val.name.toString());
-                                                              selectedDistrict = val;
-                                                              authController.updateUI();
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                                  SizedBox(width: 30,),
-
-
-                                                  Expanded(
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Align(
-                                                            alignment: Alignment.centerLeft,
-                                                            child: AutoSizeText("Sub District*",style: TextStyle(
-                                                              color: Colors.black87,
-                                                              fontSize: subHead-1,
-                                                            ),),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 60,
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(color: greyText),
-                                                            borderRadius: const BorderRadius.all(
-                                                              const Radius.circular(10.0),
-                                                            ),
-                                                            color: white,
-                                                          ),
-                                                          alignment: Alignment.center,
-                                                          padding: const EdgeInsets.all(5),
-                                                          child: DropdownButton<dynamic>(
-                                                            hint: Text("Select Thana"),
-                                                            underline: SizedBox(),
-                                                            isExpanded: true,
-                                                            value: selectedDistrict,
-                                                            items: district.map((value) {
-                                                              return DropdownMenuItem<dynamic>(
-                                                                value: value,
-                                                                child: new Text(value.toString()),
-                                                              );
-                                                            }).toList(),
-                                                            onChanged: (val) async{
-                                                              print(val.name.toString());
-                                                              selectedDistrict = val;
-                                                              authController.updateUI();
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                                ],
-                                              ),
-
-
-                                              SizedBox(height: 5,),
-
-
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Align(
-                                                            alignment: Alignment.centerLeft,
-                                                            child: AutoSizeText("Floor number",style: TextStyle(
-                                                              color: Colors.black87,
-                                                              fontSize: subHead-1,
-                                                            ),),
-                                                          ),
-                                                        ),
-
-                                                        TextField(
-                                                          autofocus: false,
-                                                          style: TextStyle(
-                                                            color: Colors.black87,
-                                                            fontSize: subHead,
-                                                          ),
-                                                          decoration: InputDecoration(
-                                                            hintText: "Address",
-                                                            border: new OutlineInputBorder(
-                                                              borderRadius: const BorderRadius.all(
-                                                                const Radius.circular(10.0),
-                                                              ),
-                                                              borderSide: BorderSide(color: greyText),
-                                                            ),
-                                                          ),
-                                                          textAlign: TextAlign.start,
-                                                          cursorColor: Colors.black87,
-                                                          keyboardType: TextInputType.number,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                                  SizedBox(width: 30,),
-
-
-                                                  Expanded(
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Align(
-                                                            alignment: Alignment.centerLeft,
-                                                            child: AutoSizeText("Floor number",style: TextStyle(
-                                                              color: Colors.black87,
-                                                              fontSize: subHead-1,
-                                                            ),),
-                                                          ),
-                                                        ),
-
-                                                        TextField(
-                                                          autofocus: false,
-                                                          style: TextStyle(
-                                                            color: Colors.black87,
-                                                            fontSize: subHead,
-                                                          ),
-                                                          decoration: InputDecoration(
-                                                            hintText: "Address",
-                                                            border: new OutlineInputBorder(
-                                                              borderRadius: const BorderRadius.all(
-                                                                const Radius.circular(10.0),
-                                                              ),
-                                                              borderSide: BorderSide(color: greyText),
-                                                            ),
-                                                          ),
-                                                          textAlign: TextAlign.start,
-                                                          cursorColor: Colors.black87,
-                                                          keyboardType: TextInputType.number,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-
-                                              SizedBox(height: 5,),
                                             ],
                                           ),
+
+
+                                          SizedBox(height: 5,),
+
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Align(
+                                                        alignment: Alignment.centerLeft,
+                                                        child: AutoSizeText("Floor number",style: TextStyle(
+                                                          color: Colors.black87,
+                                                          fontSize: subHead-1,
+                                                        ),),
+                                                      ),
+                                                    ),
+
+                                                    TextField(
+                                                      autofocus: false,
+                                                      style: TextStyle(
+                                                        color: Colors.black87,
+                                                        fontSize: subHead,
+                                                      ),
+                                                      decoration: InputDecoration(
+                                                        hintText: "Address",
+                                                        border: new OutlineInputBorder(
+                                                          borderRadius: const BorderRadius.all(
+                                                            const Radius.circular(10.0),
+                                                          ),
+                                                          borderSide: BorderSide(color: greyText),
+                                                        ),
+                                                      ),
+                                                      textAlign: TextAlign.start,
+                                                      cursorColor: Colors.black87,
+                                                      keyboardType: TextInputType.number,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+
+                                              SizedBox(width: 30,),
+
+
+                                              Expanded(
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Align(
+                                                        alignment: Alignment.centerLeft,
+                                                        child: AutoSizeText("Floor number",style: TextStyle(
+                                                          color: Colors.black87,
+                                                          fontSize: subHead-1,
+                                                        ),),
+                                                      ),
+                                                    ),
+
+                                                    TextField(
+                                                      autofocus: false,
+                                                      style: TextStyle(
+                                                        color: Colors.black87,
+                                                        fontSize: subHead,
+                                                      ),
+                                                      decoration: InputDecoration(
+                                                        hintText: "Address",
+                                                        border: new OutlineInputBorder(
+                                                          borderRadius: const BorderRadius.all(
+                                                            const Radius.circular(10.0),
+                                                          ),
+                                                          borderSide: BorderSide(color: greyText),
+                                                        ),
+                                                      ),
+                                                      textAlign: TextAlign.start,
+                                                      cursorColor: Colors.black87,
+                                                      keyboardType: TextInputType.number,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(height: 5,),
 
                                           SizedBox(height: 15,),
                                           Divider(thickness: 2, color: dividerBlue,),
